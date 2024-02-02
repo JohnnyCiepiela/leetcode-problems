@@ -11,6 +11,67 @@ public class Main {
 
     }
 
+    //485. Max Consecutive Ones
+    //my solution
+    public static int findMaxConsecutiveOnes(int[] nums) {
+        ArrayList<Integer> onesValues = new ArrayList<>();
+
+        if (nums.length == 1 && nums[0] == 0) {
+            return 0;
+        }
+        if (nums.length == 1 && nums[0] == 1) {
+            return 1;
+        }
+
+        int counter = 0;
+        for (int number : nums) {
+            if (number == 1) {
+                counter++;
+                onesValues.add(counter);
+            } else if (number == 0) {
+                counter = 0;
+            }
+        }
+
+        List<Integer> sortedOnes = onesValues.stream().sorted().toList();
+        if (sortedOnes.isEmpty()) {
+            return 0;
+        }
+
+        return sortedOnes.get(sortedOnes.size() - 1);
+    }
+
+    //better solution
+    public static int findMaxConsecutiveOnesBetter(int[] nums) {
+        int max = 0;
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (nums[i] == 0)    // reset sum to zero when encounters zeros
+            {
+                sum = 0;
+            } else                // keep update max
+            {
+                max = Math.max(max, sum);
+            }
+        }
+        return max;
+    }
+
+    //283. Move Zeroes
+    public static void moveZeroes(int[] nums) {
+        int snowBallSize = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                snowBallSize++;
+            } else if (snowBallSize > 0) {
+                int t = nums[i];
+                nums[i] = 0;
+                nums[i - snowBallSize] = t;
+            }
+        }
+    }
+
     //520. Detect Capital
     //my solution
     public static boolean detectCapitalUse(String word) {
@@ -50,20 +111,19 @@ public class Main {
         char[] array = s.toCharArray();
         HashMap<Character, Integer> map = new HashMap<>();
 
-        for (int i=0; i<array.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             char c = array[i];
 
             if (!map.containsKey(c)) {
-                map.put(c,1);
-            }
-            else {
-                map.replace(c,2);
+                map.put(c, 1);
+            } else {
+                map.replace(c, 2);
             }
         }
 
         ArrayList<Character> listOfUnique = new ArrayList<>();
 
-        for (char c: map.keySet()) {
+        for (char c : map.keySet()) {
             if (map.get(c) == 1) {
                 listOfUnique.add(c);
             }
@@ -76,12 +136,12 @@ public class Main {
         int result = 0;
 
         outerLoop:
-        for (int i=0; i<s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
 
             innerLoop:
-            for (int j=0; j<listOfUnique.size(); j++) {
+            for (int j = 0; j < listOfUnique.size(); j++) {
 
-                if(s.charAt(i) == listOfUnique.get(j)) {
+                if (s.charAt(i) == listOfUnique.get(j)) {
                     result = s.indexOf(s.charAt(i));
                     break outerLoop;
                 }
@@ -108,9 +168,9 @@ public class Main {
             boolean broken = false;
 
             innerLoop:
-            for(int c = 0; c< words[i].length(); c++) {
+            for (int c = 0; c < words[i].length(); c++) {
 
-                if( !firstRow.contains(String.valueOf(words[i].toLowerCase().charAt(c))) ) {
+                if (!firstRow.contains(String.valueOf(words[i].toLowerCase().charAt(c)))) {
                     broken = true;
                     break innerLoop;
                 }
@@ -127,9 +187,9 @@ public class Main {
             boolean broken = false;
 
             innerLoop:
-            for(int c = 0; c< words[i].length(); c++) {
+            for (int c = 0; c < words[i].length(); c++) {
 
-                if( !secondRow.contains(String.valueOf(words[i].toLowerCase().charAt(c))) ) {
+                if (!secondRow.contains(String.valueOf(words[i].toLowerCase().charAt(c)))) {
                     broken = true;
                     break innerLoop;
                 }
@@ -145,9 +205,9 @@ public class Main {
             boolean broken = false;
 
             innerLoop:
-            for(int c = 0; c< words[i].length(); c++) {
+            for (int c = 0; c < words[i].length(); c++) {
 
-                if( !thirdRow.contains(String.valueOf(words[i].toLowerCase().charAt(c))) ) {
+                if (!thirdRow.contains(String.valueOf(words[i].toLowerCase().charAt(c)))) {
                     broken = true;
                     break innerLoop;
                 }
@@ -162,14 +222,12 @@ public class Main {
         String[] newResultTwo = resultArrayListTwo.stream().toArray(String[]::new);
         String[] newResultThree = resultArrayListThree.stream().toArray(String[]::new);
 
-        if(newResultOne.length > newResultTwo.length) {
+        if (newResultOne.length > newResultTwo.length) {
             return newResultOne;
-        }
-        else {
-            if(newResultTwo.length > newResultThree.length) {
+        } else {
+            if (newResultTwo.length > newResultThree.length) {
                 return newResultTwo;
-            }
-            else {
+            } else {
                 return newResultThree;
             }
         }
