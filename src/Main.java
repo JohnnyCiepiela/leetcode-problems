@@ -8,7 +8,141 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        int[] nums = {3, 2, 2, 3};
+        int val = 3;
+        int result = removeElement(nums, val);
+        System.out.println(result);
+    }
 
+    //27. Remove Element
+    public static int removeElement(int[] nums, int val) {
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != val) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                i++;
+            }
+        }
+        return i;
+    }
+
+    //389. Find the Difference
+    public static char findTheDifference(String s, String t) {
+        char[] sArray = s.toCharArray();
+        char[] tArray = t.toCharArray();
+        Arrays.sort(sArray);
+        Arrays.sort(tArray);
+        char[] newArray = new char[sArray.length];
+
+        for (int i = 0; i < sArray.length; i++) {
+
+            innerLoop:
+            for (int j = 0; j < tArray.length; j++) {
+
+                if (sArray[i] == tArray[j]) {
+                    newArray[i] = tArray[j];
+                    tArray[j] = 0;
+                    break innerLoop;
+                }
+
+            }
+
+        }
+
+        char result = 0;
+        for (int j = 0; j < tArray.length; j++) {
+            if (tArray[j] != 0) {
+                result = tArray[j];
+            }
+        }
+
+        return result;
+    }
+
+    //274. H-Index
+    public static int hIndex(int[] citations) {
+        Integer[] converted = Arrays.stream(citations).boxed().toArray(Integer[]::new);
+        Arrays.sort(converted);
+
+        int[] filteredDisctinct = Arrays.stream(converted)
+            .distinct()
+            .mapToInt(num -> (Integer) num)
+            .toArray();
+
+        if (converted.length > 1 && filteredDisctinct.length == 1) {
+            return filteredDisctinct[0];
+        }
+
+        int[] filteredArray = Arrays.stream(converted)
+            .filter(num -> num != null && (Integer) num != 0)
+            .mapToInt(num -> (Integer) num)
+            .toArray();
+
+        int notZerosCounter = 0;
+        myLoop:
+        for (int i = 0; i < filteredArray.length; i++) {
+            if (filteredArray[i] != 0) {
+                notZerosCounter++;
+            }
+        }
+        if (notZerosCounter == 0) {
+            return 0;
+        }
+
+        if (filteredArray.length == 1) {
+            return 1;
+        }
+        if ((filteredArray.length == 2 && filteredArray[0] == 0) || (filteredArray.length == 2 && filteredArray[1] == 0)) {
+            return Math.max(filteredArray[0], filteredArray[1]);
+        }
+        if (filteredArray.length == 2 && filteredArray[0] == filteredArray[1] && filteredArray[0] > 2) {
+            return 2;
+        }
+        if (filteredArray.length == 2 && filteredArray[0] == filteredArray[1]) {
+            return filteredArray[0];
+        }
+        if ((filteredArray.length == 2 && filteredArray[0] == 1) || (filteredArray.length == 2 && filteredArray[1] == 1)) {
+            return 1;
+        }
+        if (filteredArray.length == 2 && filteredArray[0] != 0 && filteredArray[1] != 0) {
+            return 2;
+        }
+
+        ArrayList<Integer> weedOut = new ArrayList<>();
+
+        int first = converted[0];
+        int last = converted[converted.length - 1];
+
+        ArrayList<Integer> allNums = new ArrayList<>();
+
+        for (int i = 0; i <= last; i++) {
+            allNums.add(i);
+        }
+
+        for (int n : allNums) {
+            System.out.println(n);
+        }
+
+        for (int i = 0; i < allNums.size(); i++) {
+            int currentNum = allNums.get(i);
+            int counter = 0;
+
+            for (int j = 0; j < converted.length; j++) {
+                if ((int) converted[j] >= currentNum) {
+                    counter++;
+                }
+            }
+
+            if (counter >= currentNum) {
+                weedOut.add(currentNum);
+            }
+        }
+
+        List<Integer> newArr = weedOut.stream().sorted().toList();
+
+        return newArr.get(newArr.size() - 1);
     }
 
     //485. Max Consecutive Ones
