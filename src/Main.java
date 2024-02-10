@@ -8,10 +8,85 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int[] nums = {3, 2, 2, 3};
+        /*int[] nums = {3, 2, 2, 3};
         int val = 3;
         int result = removeElement(nums, val);
-        System.out.println(result);
+        System.out.println(result);*/
+        /*int n = 5;
+        List<String> result = fizzBuzz(n);
+        System.out.println(result);*/
+        /*String[] words = {"ihs", "nice", "sih", "iecn", "icen"};
+        String result = maxAnagram(words); //result should be 'nice'
+        System.out.println(result);*/
+    }
+
+    //Max Anagram from an interview
+    public static String maxAnagram(String[] words) {
+        String[] newWords = new String[words.length];
+
+        //sorting characters in each element of words and placing it in newWords array
+        for (int i = 0; i < words.length; i++) {
+            StringBuilder str = new StringBuilder();
+            char[] newCharArray;
+            newCharArray = words[i].toCharArray();
+            Arrays.sort(newCharArray);
+
+            for (char c : newCharArray) {
+                str.append(c);
+            }
+            newWords[i] = str.toString();
+        }
+
+        //counting the number of occurrences of words in newWords
+        HashMap<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < newWords.length; i++) {
+
+            if (!map.containsKey(newWords[i])) {
+                map.put(newWords[i], 1);
+            } else {
+                map.put(newWords[i], map.get(newWords[i]) + 1);
+            }
+
+        }
+
+        //finding key associated with max value
+        String max = Collections.max(map.entrySet(), HashMap.Entry.comparingByValue()).getKey();
+        char[] maxArray = max.toCharArray();
+        Arrays.sort(maxArray);
+
+        //iterating over words once again to find the first element that after being sorted equals the max value
+        String result = null;
+        myLoop:
+        for (int i = 0; i < words.length; i++) {
+            char[] newCharArray;
+            newCharArray = words[i].toCharArray();
+            Arrays.sort(newCharArray);
+
+            if (Arrays.equals(newCharArray, maxArray)) {
+                result = words[i];
+                break myLoop;
+            }
+        }
+        return result;
+    }
+
+    //412. Fizz Buzz
+    public static List<String> fizzBuzz(int n) {
+        String[] sArray = new String[n];
+
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
+                sArray[i - 1] = "FizzBuzz";
+            } else if (i % 3 == 0) {
+                sArray[i - 1] = "Fizz";
+            } else if (i % 5 == 0) {
+                sArray[i - 1] = "Buzz";
+            } else {
+                sArray[i - 1] = String.valueOf(i);
+            }
+        }
+
+        return List.of(sArray);
     }
 
     //27. Remove Element
