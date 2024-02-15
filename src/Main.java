@@ -18,6 +18,80 @@ public class Main {
         /*String[] words = {"ihs", "nice", "sih", "iecn", "icen"};
         String result = maxAnagram(words); //result should be 'nice'
         System.out.println(result);*/
+//        String jewels = "aA", stones = "aAAbbbb";
+        int[] bills = {5, 5, 10, 10, 20};
+        boolean result = lemonadeChange(bills);
+        System.out.println(result);
+    }
+
+    //860. Lemonade Change
+    public static boolean lemonadeChange(int[] bills) {
+        if (bills[0] < 5) {
+            return false;
+        }
+
+        int fiveBillsCounter = 0;
+        int tenBillsCounter = 0;
+        int twentyBillsCounter = 0;
+        if (bills[0] == 5) {
+            fiveBillsCounter++;
+        }
+        if (bills[0] == 10) {
+            tenBillsCounter++;
+        }
+        if (bills[0] == 20) {
+            twentyBillsCounter++;
+        }
+
+        int[] newBills = Arrays.copyOfRange(bills, 1, bills.length);
+
+        for (int bill : newBills) {
+            if (bill == 5) {
+                fiveBillsCounter++;
+            }
+            if (bill == 10) {
+                tenBillsCounter++;
+                fiveBillsCounter--;
+            }
+            if (bill == 20) {
+                twentyBillsCounter++;
+                if (tenBillsCounter > 0 && fiveBillsCounter > 0) {
+                    tenBillsCounter--;
+                    fiveBillsCounter--;
+                } else if (tenBillsCounter <= 0 && fiveBillsCounter >= 3) {
+                    fiveBillsCounter--;
+                    fiveBillsCounter--;
+                    fiveBillsCounter--;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        System.out.println(fiveBillsCounter);
+        System.out.println(tenBillsCounter);
+        System.out.println(twentyBillsCounter);
+
+        if (fiveBillsCounter < 0 || tenBillsCounter < 0 || twentyBillsCounter < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    //771. Jewels and Stones
+    public static int numJewelsInStones(String jewels, String stones) {
+        int counter = 0;
+        for (int i = 0; i < jewels.length(); i++) {
+
+            for (int j = 0; j < stones.length(); j++) {
+                if (jewels.charAt(i) == stones.charAt(j)) {
+                    counter++;
+                }
+            }
+
+        }
+        return counter;
     }
 
     //Max Anagram from an interview
