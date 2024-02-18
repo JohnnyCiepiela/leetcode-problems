@@ -8,20 +8,56 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        /*int[] nums = {3, 2, 2, 3};
-        int val = 3;
-        int result = removeElement(nums, val);
+        /*int[] nums = {2, 2, 1};
+        int result = singleNumber(nums);
         System.out.println(result);*/
-        /*int n = 5;
-        List<String> result = fizzBuzz(n);
-        System.out.println(result);*/
-        /*String[] words = {"ihs", "nice", "sih", "iecn", "icen"};
-        String result = maxAnagram(words); //result should be 'nice'
-        System.out.println(result);*/
-//        String jewels = "aA", stones = "aAAbbbb";
-        int[] bills = {5, 5, 10, 10, 20};
-        boolean result = lemonadeChange(bills);
+        int[] nums = {1, 2, 3, 1, 1, 3};
+        int result = numIdenticalPairs(nums);
         System.out.println(result);
+    }
+
+    //1512. Number of Good Pairs
+    public static int numIdenticalPairs(int[] nums) {
+        int counter = 0;
+        for (int i = 0; i < nums.length; i++) {
+
+            for (int j = i + 1; j < nums.length; j++) {
+
+                if (nums[i] == nums[j] && i < j) {
+                    counter++;
+                }
+
+            }
+
+        }
+
+        return counter;
+    }
+
+    //136. Single Number
+    public static int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int number = nums[i];
+
+            if (!map.containsKey(number)) {
+                map.put(number, 1);
+            } else {
+                map.put(number, map.get(number) + 1);
+            }
+        }
+
+        int result = 0;
+        for (HashMap.Entry<Integer, Integer> set :
+            map.entrySet()) {
+
+            if (set.getValue() == 1) {
+                result = set.getKey();
+            }
+        }
+
+        return result;
     }
 
     //860. Lemonade Change
