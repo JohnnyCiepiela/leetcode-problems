@@ -3,17 +3,56 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        /*int[] nums = {2, 2, 1};
-        int result = singleNumber(nums);
-        System.out.println(result);*/
-        int[] nums = {1, 2, 3, 1, 1, 3};
-        int result = numIdenticalPairs(nums);
-        System.out.println(result);
+    }
+
+    //2798. Number of Employees Who Met the Target
+    public static int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
+        int total = 0;
+        for (int h : hours) {
+            if (h >= target) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    //2011. Final Value of Variable After Performing Operations
+    public static int finalValueAfterOperations(String[] operations) {
+        int xValue = 0;
+        for (int i = 0; i < operations.length; i++) {
+            if (Objects.equals(operations[i], "--X")) {
+                --xValue;
+            }
+            if (Objects.equals(operations[i], "X--")) {
+                xValue--;
+            }
+            if (Objects.equals(operations[i], "++X")) {
+                ++xValue;
+            }
+            if (Objects.equals(operations[i], "X++")) {
+                xValue++;
+            }
+        }
+        return xValue;
+    }
+
+    //better solution
+    public static int finalValueAfterOperationsBetter(String[] operations) {
+        int val = 0;
+        for (int i = 0; i < operations.length; i++) {
+            if (operations[i].charAt(1) == '+') {
+                val++; //now that's smart
+            } else {
+                val--;
+            }
+        }
+        return val;
     }
 
     //1512. Number of Good Pairs
@@ -26,11 +65,8 @@ public class Main {
                 if (nums[i] == nums[j] && i < j) {
                     counter++;
                 }
-
             }
-
         }
-
         return counter;
     }
 
@@ -56,7 +92,6 @@ public class Main {
                 result = set.getKey();
             }
         }
-
         return result;
     }
 
