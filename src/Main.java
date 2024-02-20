@@ -11,6 +11,31 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    //2114. Maximum Number of Words Found in Sentences
+    public static int mostWordsFound(String[] sentences) {
+        for (int i = 0; i < sentences.length; i++) {
+            sentences[i] = String.valueOf(sentences[i].split(" ").length);
+        }
+        int[] arr = new int[sentences.length];
+        for (int i = 0; i < sentences.length; i++) {
+            arr[i] = Integer.parseInt(sentences[i]);
+        }
+        Arrays.sort(arr);
+        return arr[arr.length - 1];
+    }
+
+    //better solution
+    public static int mostWordsFoundBetter(String[] sentences) {
+        int maxLen = 0;
+        for (String currSent : sentences) {
+            int currLen = currSent.split(" ").length;
+            if (maxLen < currLen) {
+                maxLen = currLen;
+            }
+        }
+        return maxLen;
+    }
+
     //2798. Number of Employees Who Met the Target
     public static int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
         int total = 0;
