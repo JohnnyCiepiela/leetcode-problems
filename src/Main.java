@@ -11,6 +11,44 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    //1431. Kids With the Greatest Number of Candies
+    public static List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        Boolean[] arr = new Boolean[candies.length];
+        for (int i = 0; i < candies.length; i++) {
+
+            int temp = candies[i];
+
+            candies[i] = candies[i] + extraCandies;
+            int max = Arrays.stream(candies).max().getAsInt();
+
+            if (candies[i] == max) {
+                arr[i] = true;
+            } else {
+                arr[i] = false;
+            }
+            candies[i] = temp;
+        }
+        return Arrays.asList(arr);
+    }
+
+    //better solutions
+    public static List<Boolean> kidsWithCandiesBetter(int[] candies, int extraCandies) {
+        List<Boolean> ans = new ArrayList<>(candies.length);
+        int max = 0;
+        for (int candy : candies) {
+            max = Math.max(candy, max);
+        }
+        for (int candy : candies) {
+            ans.add(candy + extraCandies >= max);
+        }
+        return ans;
+    }
+
+    public static List<Boolean> kidsWithCandiesBetter2(int[] candies, int extraCandies) {
+        int max = Arrays.stream(candies).max().getAsInt();
+        return Arrays.stream(candies).mapToObj(candy -> candy + extraCandies >= max).collect(Collectors.toList());
+    }
+
     //2114. Maximum Number of Words Found in Sentences
     public static int mostWordsFound(String[] sentences) {
         for (int i = 0; i < sentences.length; i++) {
