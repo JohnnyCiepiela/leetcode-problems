@@ -3,12 +3,47 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+    }
+
+    //1365. How Many Numbers Are Smaller Than the Current Number
+    public static int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] newArr = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            int counter = 0;
+            for (int j = 0; j < nums.length; j++) {
+                if (i != j && nums[j] < nums[i]) {
+                    counter++;
+                }
+            }
+            newArr[i] = counter;
+        }
+        return newArr;
+    }
+
+    //HashMap interesting solution
+    public static int[] smallerNumbersThanCurrentHashMap(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] copy = nums.clone();
+        Arrays.sort(copy);
+        for (int i = 0; i < nums.length; i++) {
+            map.putIfAbsent(copy[i], i);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            copy[i] = map.get(nums[i]);
+        }
+        return copy;
+    }
+
+    //1108. Defanging an IP Address
+    public static String defangIPaddr(String address) {
+        return address.replaceAll("\\.", "[.]");
     }
 
     //1431. Kids With the Greatest Number of Candies
