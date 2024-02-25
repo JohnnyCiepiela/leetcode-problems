@@ -12,6 +12,22 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    //151. Reverse Words in a String
+    public static String reverseWords(String s) {
+        String[] arr = s.split("\\s+");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = arr.length - 1; i >= 0; i--) {
+            stringBuilder.append(arr[i]);
+            stringBuilder.append(" ");
+        }
+        return stringBuilder.toString().replaceFirst("\\s++$", "");
+    }
+
+    //1678. Goal Parser Interpretation
+    public static String interpret(String command) {
+        return command.replaceAll("\\(\\)", "o").replaceAll("\\(al\\)", "al");
+    }
+
     //1365. How Many Numbers Are Smaller Than the Current Number
     public static int[] smallerNumbersThanCurrent(int[] nums) {
         int[] newArr = new int[nums.length];
