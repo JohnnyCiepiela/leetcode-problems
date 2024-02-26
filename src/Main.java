@@ -12,6 +12,42 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    //1662. Check If Two String Arrays are Equivalent
+    public static boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        StringBuilder str1 = new StringBuilder();
+        StringBuilder str2 = new StringBuilder();
+        for (String s : word1) {
+            str1.append(s);
+        }
+        for (String s : word2) {
+            str2.append(s);
+        }
+        return str1.toString().equals(str2.toString());
+    }
+
+    //1768. Merge Strings Alternately
+    public static String mergeAlternately(String word1, String word2) {
+        StringBuilder str = new StringBuilder();
+        int c = 0;
+        int pointerWordOne = 0;
+        int pointerWordTwo = 0;
+        while (c <= word1.length() + word2.length()) {
+
+            if (pointerWordOne < word1.length()) {
+                str.append(word1.charAt(pointerWordOne));
+                pointerWordOne++;
+            }
+
+            if (pointerWordTwo < word2.length()) {
+                str.append(word2.charAt(pointerWordTwo));
+                pointerWordTwo++;
+            }
+
+            c++;
+        }
+        return str.toString();
+    }
+
     //151. Reverse Words in a String
     public static String reverseWords(String s) {
         String[] arr = s.split("\\s+");
