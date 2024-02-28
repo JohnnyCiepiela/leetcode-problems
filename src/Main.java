@@ -12,6 +12,100 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    //1816. Truncate Sentence
+    public static String truncateSentence(String s, int k) {
+        String[] arr = s.split(" ");
+        StringBuilder str = new StringBuilder();
+
+        int counter = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (counter >= k) {
+                str.append(arr[i]);
+            }
+            counter++;
+        }
+        return str.toString();
+    }
+
+    //better solution
+    public static String truncateSentenceBetter(String s, int k) {
+        int n = s.length();
+        int count = 0;
+        String ans = " ";
+
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == ' ') {
+                count++;
+            }
+            if (count == k) {
+                ans = s.substring(0, i);
+                break;
+            }
+            if (count < k) {
+                ans = s;
+            }
+        }
+        return ans;
+
+    }
+
+    //2325. Decode the Message
+    public static String decodeMessage(String key, String message) {
+        String keyCleared = key.replaceAll("\\s", "");
+        char[] keyArr = keyCleared.toCharArray();
+
+        char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        HashMap<Character, Character> map = new HashMap<>();
+
+        int pointerAlphabet = 0;
+        for (int i = 0; i < keyArr.length; i++) {
+            if (pointerAlphabet == alphabet.length) {
+                break;
+            }
+            if (!map.containsValue(alphabet[pointerAlphabet]) && !map.containsKey(keyArr[i])) {
+                map.put(keyArr[i], alphabet[pointerAlphabet]);
+                pointerAlphabet++;
+            }
+        }
+
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < message.length(); i++) {
+            if (message.charAt(i) == ' ') {
+                str.append(' ');
+            } else {
+                str.append(map.get(message.charAt(i)));
+            }
+        }
+        return str.toString();
+    }
+
+    //better solution
+    public String decodeMessageBetter(String key, String message) {
+        StringBuilder ans = new StringBuilder();//Using String Builder to append the string
+        key = key.replaceAll(" ", "");
+        //Removing the spaces
+        HashMap<Character, Character> letters = new HashMap<>();
+        //Mapping the key into a hashmap.
+        char original = 'a';
+        for (int i = 0; i < key.length(); i++) {
+            if (!letters.containsKey(key.charAt(i))) {
+                letters.put(key.charAt(i), original++);
+            }
+        }
+        //After the first pass all the letters of the key will be mapped with their respective original letters.
+        for (int i = 0; i < message.length(); i++) {
+            if (letters.containsKey(message.charAt(i))) {
+                //Now replacing the letters of the message with appropriate letter according to the key
+                ans.append(letters.get(message.charAt(i)));
+            } else {
+                ans.append(message.charAt(i));
+                //This is for characters other than the letters in the key example a space " "
+                //They will not be replaced by any letters hence original letter is appended into the StringBuilder
+            }
+        }
+        return ans.toString();
+    }
+
     //1662. Check If Two String Arrays are Equivalent
     public static boolean arrayStringsAreEqual(String[] word1, String[] word2) {
         StringBuilder str1 = new StringBuilder();
