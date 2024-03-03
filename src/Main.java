@@ -12,6 +12,52 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    //1470. Shuffle the Array
+    public static int[] shuffle(int[] nums, int n) {
+        int[] arr = new int[n * 2];
+        int pointerOne = 0;
+        int pointerTwo = n;
+        for (int i = 0; i <arr.length; i++) {
+            if(i % 2 == 0) {
+                arr[i] = nums[pointerOne];
+                pointerOne++;
+            }
+            else {
+                arr[i] = nums[pointerTwo];
+                pointerTwo++;
+            }
+        }
+
+        return arr;
+    }
+
+    //2678. Number of Senior Citizens
+    public static int countSeniors(String[] details) {
+        int counter = 0;
+        for (int i = 0; i < details.length; i++) {
+            StringBuilder str = new StringBuilder();
+            str.append(details[i].charAt(11));
+            str.append(details[i].charAt(12));
+
+            if (Integer.valueOf(str.toString()) > 60) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    //better solution
+    public static int countSeniorsBetter(String[] details) {
+        int count = 0;
+        for (String s : details) {
+            int age = Integer.parseInt(s.substring(11, 13));
+            if (age > 60) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     //1816. Truncate Sentence
     public static String truncateSentence(String s, int k) {
         String[] arr = s.split(" ");
