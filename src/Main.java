@@ -10,6 +10,27 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        String[] words = {"abc", "car", "ada", "racecar", "cool"};
+        String result = firstPalindrome(words);
+        System.out.println(result);
+    }
+
+    //709. To Lower Case
+    public String toLowerCase(String s) {
+        //I refuse to reinvent the wheel
+        return s.toLowerCase();
+    }
+
+    //2108. Find First Palindromic String in the Array
+    public static String firstPalindrome(String[] words) {
+        String result = "";
+        for (String str : words) {
+            if (str.equals(new StringBuilder(str).reverse().toString())) {
+                result = str;
+                break;
+            }
+        }
+        return result;
     }
 
     //1470. Shuffle the Array
@@ -17,12 +38,11 @@ public class Main {
         int[] arr = new int[n * 2];
         int pointerOne = 0;
         int pointerTwo = n;
-        for (int i = 0; i <arr.length; i++) {
-            if(i % 2 == 0) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i % 2 == 0) {
                 arr[i] = nums[pointerOne];
                 pointerOne++;
-            }
-            else {
+            } else {
                 arr[i] = nums[pointerTwo];
                 pointerTwo++;
             }
