@@ -10,9 +10,26 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        String[] words = {"abc", "car", "ada", "racecar", "cool"};
-        String result = firstPalindrome(words);
+        String sentence = "thequickbrownfoxjumpsoverthelazydog";
+        boolean result = checkIfPangram(sentence);
         System.out.println(result);
+    }
+
+    //1832. Check if the Sentence Is Pangram
+    public static boolean checkIfPangram(String sentence) {
+        HashMap<Character, Integer> hm = new HashMap<>();
+        int n = sentence.length();
+        for (int i = 0; i < n; i++) {
+            char ch = sentence.charAt(i);
+            hm.put(ch, 1);
+        }
+        for (int i = 0; i < 26; i++) {
+            char ch = (char) ('a' + i);
+            if (!(hm.containsKey(ch))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //709. To Lower Case
