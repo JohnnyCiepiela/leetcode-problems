@@ -15,6 +15,20 @@ public class Main {
         System.out.println(result);
     }
 
+    //2469. Convert the Temperature
+    public static double[] convertTemperature(double celsius) {
+        return new double[]{celsius + 273.15, celsius * 1.80 + 32};
+    }
+
+    //1920. Build Array from Permutation
+    public static int[] buildArray(int[] nums) {
+        int[] ans = new int[nums.length];
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = nums[nums[i]];
+        }
+        return ans;
+    }
+
     //1832. Check if the Sentence Is Pangram
     public static boolean checkIfPangram(String sentence) {
         HashMap<Character, Integer> hm = new HashMap<>();
