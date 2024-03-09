@@ -15,6 +15,21 @@ public class Main {
         System.out.println(result);
     }
 
+    //2894. Divisible and Non-divisible Sums Difference
+    public static int differenceOfSums(int n, int m) {
+        int num1 = 0;
+        int num2 = 0;
+        for (int i = 1; i <= n; i++) {
+
+            if (i % m != 0) {
+                num1 = num1 + i;
+            } else {
+                num2 = num2 + i;
+            }
+        }
+        return num1 - num2;
+    }
+
     //2469. Convert the Temperature
     public static double[] convertTemperature(double celsius) {
         return new double[]{celsius + 273.15, celsius * 1.80 + 32};
