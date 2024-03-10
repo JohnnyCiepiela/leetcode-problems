@@ -10,9 +10,31 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        String sentence = "thequickbrownfoxjumpsoverthelazydog";
-        boolean result = checkIfPangram(sentence);
+        int[][] accounts = {{1, 2, 3}, {3, 2, 1}};
+        int result = maximumWealth(accounts);
         System.out.println(result);
+    }
+
+    //1672. Richest Customer Wealth
+    public static int maximumWealth(int[][] accounts) {
+        int[] arr = new int[accounts.length];
+
+        for (int i = 0; i < accounts.length; i++) {
+            int sumWealth = 0;
+            for (int j = 0; j < accounts[i].length; j++) {
+                sumWealth = sumWealth + accounts[i][j];
+            }
+            arr[i] = sumWealth;
+
+        }
+
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
     }
 
     //2894. Divisible and Non-divisible Sums Difference
