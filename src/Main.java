@@ -15,6 +15,18 @@ public class Main {
         System.out.println(result);
     }
 
+    //2810. Faulty Keyboard
+    public static String finalString(String s) {
+        StringBuilder str = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c == 'i') {
+                str.reverse();
+            }
+            str.append(c);
+        }
+        return str.toString();
+    }
+
     //1672. Richest Customer Wealth
     public static int maximumWealth(int[][] accounts) {
         int[] arr = new int[accounts.length];
