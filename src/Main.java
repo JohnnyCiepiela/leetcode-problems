@@ -10,10 +10,106 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        String[] names = {"Mary", "John", "Emma"};
-        int[] heights = {180, 165, 170};
-        String[] result = sortPeople(names, heights);
-        System.out.println(result);
+    }
+
+    //2215. Find the Difference of Two Arrays
+    public static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        List<List<Integer>> majorList = new ArrayList<>();
+        List<Integer> answer1 = new ArrayList<>();
+        List<Integer> answer2 = new ArrayList<>();
+
+        for (Integer num1 : nums1) {
+
+            boolean isOnTheList = false;
+            for (Integer num2 : nums2) {
+                if (Objects.equals(num1, num2)) {
+                    isOnTheList = true;
+                }
+            }
+            if (isOnTheList == false) {
+                answer1.add(num1);
+            }
+        }
+
+        for (Integer num2 : nums2) {
+
+            boolean isOnTheList = false;
+            for (Integer num1 : nums1) {
+                if (Objects.equals(num2, num1)) {
+                    isOnTheList = true;
+                }
+            }
+            if (isOnTheList == false) {
+                answer2.add(num2);
+            }
+        }
+
+        majorList.add(answer1.stream().distinct().toList());
+        majorList.add(answer2.stream().distinct().toList());
+
+        return majorList;
+    }
+
+    //3005. Count Elements With Maximum Frequency
+    public static int maxFrequencyElements(int[] nums) {
+        if (nums.length == 1) {
+            return 1;
+        }
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!map.containsKey(nums[i])) {
+                map.put(nums[i], 1);
+            } else {
+                map.put(nums[i], map.get(nums[i]) + 1);
+            }
+        }
+
+        int max = 0;
+        int counter = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            Integer value = entry.getValue();
+
+            if (max < value) {
+                max = value;
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            Integer value = entry.getValue();
+
+            if (value == max && value > 1) {
+                counter = counter + value;
+            }
+        }
+
+        if (counter == 0) {
+            return nums.length;
+        }
+
+        return counter;
+    }
+
+    //better solution
+    public static int maxFrequencyElementsBetter(int[] nums) {
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        for (int num : nums) {
+            mp.put(num, mp.getOrDefault(num, 0) + 1);
+        }
+
+        int count = 0;
+        int maxFreq = Integer.MIN_VALUE;
+        for (int freq : mp.values()) {
+            maxFreq = Math.max(maxFreq, freq);
+        }
+
+        for (int freq : mp.values()) {
+            if (freq == maxFreq) {
+                count += maxFreq;
+            }
+        }
+        return count;
     }
 
     //2418. Sort the People
