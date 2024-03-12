@@ -10,9 +10,25 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int[][] accounts = {{1, 2, 3}, {3, 2, 1}};
-        int result = maximumWealth(accounts);
+        String[] names = {"Mary", "John", "Emma"};
+        int[] heights = {180, 165, 170};
+        String[] result = sortPeople(names, heights);
         System.out.println(result);
+    }
+
+    //2418. Sort the People
+    public static String[] sortPeople(String[] names, int[] heights) {
+        HashMap<Integer, String> map = new HashMap<>();
+
+        for (int i = 0; i < names.length; i++) {
+            map.put(heights[i], names[i]);
+        }
+
+        return map.entrySet()
+            .stream()
+            .sorted(Map.Entry.<Integer, String>comparingByKey().reversed())
+            .map(Map.Entry::getValue)
+            .toArray(String[]::new);
     }
 
     //2810. Faulty Keyboard
