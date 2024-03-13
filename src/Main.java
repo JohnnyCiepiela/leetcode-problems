@@ -12,6 +12,28 @@ public class Main {
     public static void main(String[] args) {
     }
 
+    //1748. Sum of Unique Elements
+    public static int sumOfUnique(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int num : nums) {
+            if (!map.containsKey(num)) {
+                map.put(num, 1);
+            } else {
+                map.put(num, map.get(num) + 1);
+            }
+        }
+
+        int counter = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == 1) {
+                counter = counter + entry.getKey();
+            }
+        }
+
+        return counter;
+    }
+
     //2215. Find the Difference of Two Arrays
     public static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
         List<List<Integer>> majorList = new ArrayList<>();
