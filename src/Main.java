@@ -10,6 +10,30 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        String s = "abacbc";
+        boolean result = areOccurrencesEqual(s);
+        System.out.println(result);
+    }
+
+    //1941. Check if All Characters Have Equal Number of Occurrences
+    public static boolean areOccurrencesEqual(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (char c : s.toCharArray()) {
+            if (!map.containsKey(c)) {
+                map.put(c, 1);
+            } else {
+                map.put(c, map.get(c) + 1);
+            }
+        }
+
+        int compare = map.values().stream().findFirst().get();
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() != compare) {
+                return false;
+            }
+        }
+        return true;
     }
 
     //1748. Sum of Unique Elements
