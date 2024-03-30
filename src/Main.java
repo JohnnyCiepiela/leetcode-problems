@@ -10,9 +10,25 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        String s = "abacbc";
-        boolean result = areOccurrencesEqual(s);
+        int[] arr = {4, 0, 2, -5, -4};
+        boolean result = uniqueOccurrences(arr);
         System.out.println(result);
+    }
+
+    //1207. Unique Number of Occurrences
+    public static boolean uniqueOccurrences(int[] arr) {
+        if (arr.length == 2) {
+            return false;
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : arr) {
+            if (!map.containsKey(num)) {
+                map.put(num, 1);
+            } else {
+                map.put(num, map.get(num) + 1);
+            }
+        }
+        return map.values().stream().distinct().toList().equals(map.values().stream().toList());
     }
 
     //1941. Check if All Characters Have Equal Number of Occurrences
