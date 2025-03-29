@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,75 @@ public class Main {
         int[] arr = {4, 0, 2, -5, -4};
         boolean result = uniqueOccurrences(arr);
         System.out.println(result);
+    }
+
+    //Implementing Binary Search
+    //if you don't wanna implement it you can just use Arrays.binarySearch() method
+    private static int binarySearch(int[] numbers, int target) {
+        //we use two pointers
+        //one at the very beginning of the array
+        //the other at the very end of an array
+        //then we find the 'middle' value between these two pointers
+        //if the target value is less than the 'middle' value, we take the 'end pointer' and move it just to the left of that 'middle' number
+        //if the target value is greater than the 'middle' value, we take the 'beginning pointer' and move it just to the right of that 'middle' number
+        //and then continue binary search with just these values contained within our two pointers
+
+        //creating our pointers
+        int low = 0;
+        int high = numbers.length - 1;
+
+        //our while loop will keep looping until our two pointers cross each other
+        while (low <= high) {
+            //we need to identify the index of the 'middle number'
+            //our middle number will be the average of the low and high indices
+            int middlePosition = (low + high) / 2;
+
+            //identify the value at that middle index
+            int middleNumber = numbers[middlePosition];
+
+            //now our checks
+            if(middleNumber == target) {
+                return middlePosition;
+            }
+            if(middleNumber < target) {
+                low = middlePosition + 1;
+            }
+            //(middleNumber > target)
+            else {
+                high = middleNumber -1;
+            }
+        }
+        return -1;
+    }
+
+    //509. Fibonacci Number
+    public int fib(int n) {
+        if(n<=1) {
+            return n;
+        }
+        return fib(n-1) + fib(n-2);
+    }
+
+    //704. Binary Search
+    public int search(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+
+        while (low <= high) {
+            int middleIndex = (low + high) / 2;
+            int middleValue = nums[middleIndex];
+
+            if(middleValue == target) {
+                return middleIndex;
+            }
+            if(middleValue < target) {
+                low = middleIndex + 1;
+            }
+            else {
+                high = middleIndex -1;
+            }
+        }
+        return -1;
     }
 
     //1207. Unique Number of Occurrences
