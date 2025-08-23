@@ -11,9 +11,23 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {4, 0, 2, -5, -4};
-        boolean result = uniqueOccurrences(arr);
-        System.out.println(result);
+        int[] arr = {3, 6, -2, -5, 7, 3};
+        printArrayRecursively(arr, 0);
+    }
+
+
+    //Print elements of the array recursively
+    public static void printArrayRecursively(int[] arr, int index) {
+        //base case: stop when index reaches the end
+        if (index == arr.length) {
+            return;
+        }
+
+        //print current elements
+        System.out.println(arr[index]);
+
+        //recursive call for the next index
+        printArrayRecursively(arr, index + 1);
     }
 
     //Implementing Binary Search
