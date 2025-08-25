@@ -11,8 +11,20 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {3, 6, -2, -5, 7, 3};
-        printArrayRecursively(arr, 0);
+
+    }
+
+    //1. Two Sum 2
+    public int[] twoSum2(int[] nums, int target) {
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[]{};
     }
 
 
