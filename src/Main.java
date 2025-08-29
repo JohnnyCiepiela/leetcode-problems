@@ -11,8 +11,50 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        int[] arr = {3, 6, -2, -5, 7, 3};
 
+        System.out.println(solution(arr));
     }
+
+    //Given an array of integers, find the pair of adjacent elements that has the largest product and return that product.
+    //Example: For inputArray = [3, 6, -2, -5, 7, 3], the output should be solution(inputArray) = 21.
+    //7 and 3 produce the largest product.
+    //my solution
+    private static int solution(int[] arr) {
+        int maxProductTemp = 0;
+        int maxProduct = 0;
+
+        for (int i = 0; i < arr.length -1; i++) {
+            maxProductTemp = arr[i] * arr[i+1];
+
+            if(maxProductTemp > maxProduct) {
+                maxProduct = maxProductTemp;
+            }
+
+            if(arr[i] == arr[0]) {
+                maxProduct = arr[0] * arr[1];
+            }
+        }
+
+        return maxProduct;
+    }
+
+    //improved solution
+    public static int solutionImproved(int[] inputArray) {
+        //start maxProduct with the first two elements of array
+        int maxProduct = inputArray[0] * inputArray[1];
+
+        //start the loop from the second element (start multiplying with second * third element)
+        for (int i = 1; i < inputArray.length - 1; i++) {
+            int product = inputArray[i] * inputArray[i + 1];
+
+            if (product > maxProduct) {
+                maxProduct = product;
+            }
+        }
+        return maxProduct;
+    }
+
 
     //1. Two Sum 2
     public int[] twoSum2(int[] nums, int target) {
@@ -26,6 +68,9 @@ public class Main {
         }
         return new int[]{};
     }
+
+
+    /////////////////////////////
 
 
     //Print elements of the array recursively
