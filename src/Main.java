@@ -11,10 +11,30 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {3, 6, -2, -5, 7, 3};
+        int[] arr = {4,3,2,1};
 
-        System.out.println(solution(arr));
+        System.out.println(Arrays.toString(transformArray(arr)));
     }
+
+    //3467. Transform Array by Parity
+    public static int[] transformArray(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] % 2 == 0) {
+                nums[i] = 0;
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] % 2 != 0) {
+                nums[i] = 1;
+            }
+        }
+
+        Arrays.sort(nums);
+
+        return nums;
+    }
+
 
     //Given an array of integers, find the pair of adjacent elements that has the largest product and return that product.
     //Example: For inputArray = [3, 6, -2, -5, 7, 3], the output should be solution(inputArray) = 21.
