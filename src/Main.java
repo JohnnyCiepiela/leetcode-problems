@@ -11,9 +11,25 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {4,3,2,1};
+        int[] arr = {1,12,-5,-6,50,3};
 
-        System.out.println(Arrays.toString(transformArray(arr)));
+        System.out.println(findMaxAverage(arr, 4));
+    }
+
+    //643. Maximum Average Subarray I
+    public static double findMaxAverage(int[] nums, int k) {
+        int cur = 0;
+        for (int i = 0; i <= k; i++) {
+            cur += nums[i];
+        }
+
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+
+
+        }
+
+        return 0.0;
     }
 
     //3467. Transform Array by Parity
