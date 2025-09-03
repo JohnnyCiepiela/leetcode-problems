@@ -18,18 +18,22 @@ public class Main {
 
     //643. Maximum Average Subarray I
     public static double findMaxAverage(int[] nums, int k) {
-        int cur = 0;
-        for (int i = 0; i <= k; i++) {
-            cur += nums[i];
+        int windowSum = 0;
+        int maxSum = 0;
+
+        //first window
+        for (int i = 0; i < k; i++) {
+            windowSum += nums[i];
+        }
+        maxSum = windowSum;
+
+        //sliding the window
+        for (int i = k; i < nums.length; i++) {
+            windowSum += nums[i] - nums[i-k]; //add new next element, remove the first from the current window
+            maxSum = Math.max(windowSum,maxSum);
         }
 
-        int max = 0;
-        for (int i = 0; i < nums.length; i++) {
-
-
-        }
-
-        return 0.0;
+        return (double) maxSum / k;
     }
 
     //3467. Transform Array by Parity
