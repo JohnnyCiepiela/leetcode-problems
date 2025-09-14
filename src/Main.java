@@ -22,37 +22,33 @@ public class Main {
 
     //1456. Maximum Number of Vowels in a Substring of Given Length
     public static int maxVowels(String s, int k) {
-        char[] arr = s.toCharArray();
+        int n = s.length();
+        int maxVowels = 0;
+        int count = 0;
 
-//        int windowVowelSum = 0;
-        ArrayList<Character> currentCharWindow = new ArrayList<>();
-
-        int maxVowelSum = 0;
+        int[] vowels = new int[128];
+        vowels['a'] = 1;
+        vowels['e'] = 1;
+        vowels['i'] = 1;
+        vowels['o'] = 1;
+        vowels['u'] = 1;
 
         //first window
         for (int i = 0; i < k; i++) {
-            if(arr[i] == 'a' || arr[i] == 'e' || arr[i] == 'i' || arr[i] == 'o' || arr[i] == 'u') {
-                currentCharWindow.add(arr[i]);
-            }
+            count += vowels[s.charAt(i)];
         }
-        maxVowelSum = currentCharWindow.size();
-        System.out.println(maxVowelSum);
 
         //sliding the window
-        /*for (int i = k; i < arr.length; i++) {
-
-            currentCharWindow = currentCharWindow
-
-            if(arr[i] == 'a' || arr[i] == 'e' || arr[i] == 'i' || arr[i] == 'o' || arr[i] == 'u') {
-                windowVowelSum = windowVowelSum + arr[i+1] - arr[i-k];
-                maxVowelSum = Math.max(windowVowelSum,maxVowelSum);
+        maxVowels = count;
+        for (int i = k; i < n; i++) {
+            count += vowels[s.charAt(i)] - vowels[s.charAt(i - k)];
+            maxVowels = Math.max(maxVowels, count);
+            //System.out.println(Arrays.toString(vowels));
+            if (maxVowels == k) {
+                return maxVowels;
             }
-            else {
-
-            }
-        }*/
-
-        return maxVowelSum;
+        }
+        return maxVowels;
     }
 
     //643. Maximum Average Subarray I
