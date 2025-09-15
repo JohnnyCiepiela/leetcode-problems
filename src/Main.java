@@ -20,6 +20,35 @@ public class Main {
         System.out.println(maxVowels(s,k));
     }
 
+    //1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
+    public static int numOfSubarrays(int[] arr, int k, int threshold) {
+        int windowSum = 0;
+        int temporaryAvg = 0;
+        int avgCount = 0;
+
+        //first window
+        for (int i = 0; i < k; i++) {
+            windowSum += arr[i];
+        }
+
+        temporaryAvg = windowSum / k;
+        if (temporaryAvg >= threshold) {
+            avgCount++;
+        }
+
+        //sliding the window
+        for (int i = k; i < arr.length; i++) {
+            windowSum += arr[i] - arr[i-k]; //add new next element, remove the first from the current window
+            temporaryAvg = windowSum / k;
+
+            if (temporaryAvg >= threshold) {
+                avgCount++;
+            }
+        }
+
+        return avgCount;
+    }
+
     //1456. Maximum Number of Vowels in a Substring of Given Length
     public static int maxVowels(String s, int k) {
         int n = s.length();
