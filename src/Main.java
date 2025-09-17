@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1746,7 +1745,6 @@ public class Main {
 
     //28. Find the Index of the First Occurrence in a String
     public static int strStr(String haystack, String needle) {
-
         if (haystack.contains(needle)) {
             return haystack.indexOf(needle);
         }
@@ -1829,7 +1827,6 @@ public class Main {
         return ans.toString();
     }
 
-
     //1. Two Sum
     public static int[] twoSum(int[] nums, int target) {
         int[] indices = new int[2];
@@ -1841,7 +1838,6 @@ public class Main {
                     indices[0] = i;
                     indices[1] = j;
                 }
-
             }
         }
         return indices;
