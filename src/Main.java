@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,75 +13,27 @@ public class Main {
     public static void main(String[] args) {
         int[] nums = {5,4,2,3};
 
-//        String s = "abciiidef";
-//        int k = 3;
-
-//        System.out.println(findMaxAverage(arr, 4));
-//        System.out.println(maxVowels(s,k));
-
         System.out.println(Arrays.toString(numberGame(nums)));
-
     }
 
     //2974. Minimum Number Game
     public static int[] numberGame(int[] nums) {
         int[] arr = new int[nums.length];
+        Arrays.sort(nums);
+
         int x = 0;
-
         while(x != nums.length) {
-
-            int minAlice = 0;
-            int minBob = 0;
-
-            //Alice removes
-            for (int i = 1; i < nums.length; i++) {
-//                minAlice = nums[i];
-
-                if(nums[i] < nums[i-1] && nums[i] != 0) {
-                    minAlice = nums[i];
-
-                    System.out.println("minAlice");
-                    System.out.println(minAlice);
-
-                }
-            }
-            System.out.println("Alice removes:");
-            System.out.println(minAlice);
-
-            System.out.println("Arrays state:");
-            System.out.println(Arrays.toString(nums));
-            System.out.println(Arrays.toString(arr));
-
-            //Bob removes
-            for (int i = 1; i < nums.length - 1; i++) {
-                minBob = nums[i];
-
-                if(nums[i] < nums[i-1] && nums[i] != 0 && nums[i] != minAlice) {
-                    minBob = nums[i];
-                }
-            }
-
-            System.out.println("Bob removes:");
-            System.out.println(minBob);
-
-            System.out.println("Arrays state:");
-            System.out.println(Arrays.toString(nums));
-            System.out.println(Arrays.toString(arr));
-
-
-            //Bob and Alice append
-           /* if(arr[0] == 0) {
-                arr[0] = minBob;
-                arr[1] = minAlice;
-            }*/
-
-
-         /*   for (int i = 0; i < arr.length; i++) {
-                arr[i] = minBob;
-
-            }*/
-
+            arr[x] = nums[x+1];
             x++;
+            x++;
+        }
+
+        int y = 0;
+        while(y != arr.length) {
+            if (arr[y] == 0) {
+                arr[y] = nums[y-1];
+            }
+            y++;
         }
         return arr;
     }
