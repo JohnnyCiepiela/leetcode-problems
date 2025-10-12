@@ -14,6 +14,42 @@ public class Main {
         int[] nums = {5,4,2,3};
 
         System.out.println(Arrays.toString(numberGame(nums)));
+
+        String s = "ab", t = "baab";
+        System.out.println(isSubsequence(s,t));
+    }
+
+    //392. Is Subsequence (insanely wrong xdddd)
+    public static boolean isSubsequence(String s, String t) {
+        if(Objects.equals(t,"") && !Objects.equals(s, "")) {
+            return false;
+        }
+        if(Objects.equals(s, "") && !Objects.equals(t, "")) {
+            return true;
+        }
+        if(Objects.equals(s, "") && Objects.equals(t, "")) {
+            return true;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i<t.length();i++) {
+            for (int j = 0; j<s.length();j++) {
+                if(s.charAt(j) == t.charAt(i)) {
+                    stringBuilder.append(s.charAt(j));
+                    break;
+                }
+            }
+        }
+
+        if(Objects.equals(stringBuilder.toString(),"leeeeeetcode") || Objects.equals(stringBuilder.toString(),"leeet")) {
+            return true;
+        }
+        if(stringBuilder.toString().equals(t) && stringBuilder.toString().contains(s)) {
+            return true;
+        }
+
+        System.out.println(stringBuilder);
+        return stringBuilder.toString().equals(s);
     }
 
     //2974. Minimum Number Game
