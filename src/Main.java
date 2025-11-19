@@ -11,12 +11,32 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        int[] nums = {5,4,2,3};
+        String password = "abcde";
 
-        System.out.println(Arrays.toString(numberGame(nums)));
+        System.out.println(validatePassword(password));
+    }
 
-        String s = "ab", t = "baab";
-        System.out.println(isSubsequence(s,t));
+    //TODO finish implementing the task from interview
+    // at least 8 characters,
+    // uppercase, lowercase, numbers, special characters
+    private static boolean validatePassword(String password) {
+        boolean lengthMet = false;
+        boolean passwordNotNull = false;
+        boolean noUpperCase = false;
+
+        //check if the password is not null (base case)
+        if(password == null) {
+            return false;
+        }
+        //at least 8 characters
+        if(password.length() < 8) {
+            return false;
+        }
+        if(password.toLowerCase().equals(password)) {
+            return false;
+        }
+
+        return true;
     }
 
     //392. Is Subsequence (insanely wrong xdddd)
@@ -1820,7 +1840,7 @@ public class Main {
 
     //stack solution
     public boolean isValidBetter(String s) {
-        Stack<Character> stack = new Stack<Character>(); // create an empty stack
+        Stack<Character> stack = new Stack<>(); // create an empty stack
         for (char c : s.toCharArray()) { // loop through each character in the string
             if (c == '(') // if the character is an opening parenthesis
             {
