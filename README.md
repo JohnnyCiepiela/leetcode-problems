@@ -1,1 +1,1 @@
-Go to src/Main.java to see my solved Leetcode problems.
+Working space for my LeetCode problem solving and interview tasks.
