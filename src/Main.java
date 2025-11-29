@@ -16,27 +16,37 @@ public class Main {
         System.out.println(validatePassword(password));
     }
 
-    //TODO finish implementing the task from interview
-    // at least 8 characters,
-    // uppercase, lowercase, numbers, special characters
+    //Finanteq Interview Task
+    //Requirements Covered:
+    //At least 8 characters
+    //Contains uppercase letters
+    //Contains lowercase letters
+    //Contains numbers
+    //Contains special characters
     private static boolean validatePassword(String password) {
-        boolean lengthMet = false;
-        boolean passwordNotNull = false;
-        boolean noUpperCase = false;
-
-        //check if the password is not null (base case)
-        if(password == null) {
-            return false;
-        }
-        //at least 8 characters
-        if(password.length() < 8) {
-            return false;
-        }
-        if(password.toLowerCase().equals(password)) {
+        if (password == null || password.length() < 8) {
             return false;
         }
 
-        return true;
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        boolean hasDigit = false;
+        boolean hasSpecial = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            } else if (Character.isLowerCase(c)) {
+                hasLower = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else {
+                // anything that's not a letter or digit counts as special char
+                hasSpecial = true;
+            }
+        }
+
+        return hasUpper && hasLower && hasDigit && hasSpecial;
     }
 
     //392. Is Subsequence (insanely wrong xdddd)
