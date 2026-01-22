@@ -1,1 +1,1 @@
-LeetCode problem solving and interview tasks.
+LeetCode problems and interview tasks.
