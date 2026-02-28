@@ -1,1 +1,1 @@
-LeetCode problems and interview tasks.
+LeetCode problems and interview tasks workspace.
